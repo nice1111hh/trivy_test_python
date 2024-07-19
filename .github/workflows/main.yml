@@ -1,20 +1,29 @@
-name: build
+
+name: Generate SBOM with Trivy
+
 on:
   push:
     branches:
-    - main
-  pull_request:
+      - main  # adjust this to match your branch
+
 jobs:
   build:
-    name: Build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Run Trivy vulnerability scanner in fs mode
-      uses: aquasecurity/trivy-action@0.20.0
-      with:
-        scan-type: 'fs'
-        scan-ref: '.'
-        trivy-config: trivy.yaml
+      uses: actions/checkout@v2
+    
+    - name: Install Trivy
+      run: |
+        wget https://github.com/aquasecurity/trivy/releases/download/v0.20.0/trivy_0.20.0_Linux-64bit.tar.gz
+        tar zxvf trivy_0.20.0_Linux-64bit.tar.gz
+        sudo mv trivy /usr/local/bin/
+    
+    - name: Scan Docker image with Trivy
+      run: |
+        trivy image --format sbom --output report.sbom your-docker-image:latest
+    
+    - name: Print SBOM report
+      run: |
+        cat report.sbom
