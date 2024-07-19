@@ -17,7 +17,7 @@ matplotlib==3.6.2
     #   -r requirements.in
     #   seaborn
 numpy==1.23.5
-numpy==1.21.3
+#numpy==1.21.3
 #added 1.21.3 to scan
     # via
     #   -r requirements.in
@@ -27,6 +27,7 @@ numpy==1.21.3
     #   scipy
     #   seaborn
     # via matplotlib
+packaging==21.3
 pandas==1.5.1
     # via
     #   -r requirements.in
@@ -49,3 +50,4 @@ seaborn==0.10.1
     # via -r requirements.in
 six==1.16.0
     # via python-dateutil
+
