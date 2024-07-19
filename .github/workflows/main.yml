@@ -34,3 +34,4 @@ jobs:
           name: trivy-sbom-report
           path: '${{ github.workspace }}/dependency-results.sbom.json'
           retention-days: 20 # 90 is the default
+
